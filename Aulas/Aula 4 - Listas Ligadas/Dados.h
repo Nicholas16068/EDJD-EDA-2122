@@ -30,7 +30,7 @@ typedef struct Jogo {
 	int cod;
 	char nome[N];
 	char tipo;
-	struct Jogo* next;		/**< apontador para próximo jogo*/
+	struct Jogo* next;		/**< apontador para próximo jogo*/                                                          
 }Jogo, *JogoPtr;
 
 /**
@@ -69,7 +69,24 @@ void AlteraJogoPtr(Jogo** h, int cod, char tipo);
 //Emilinar Jogo
 Jogo* RemoveJogo(Jogo* h, int cod);
 //Devolve endereço do jogo
-Jogo* ProcuraJogo(Jogo* h, int cod);
+Jogo* ProcuraJogo(Jogo* h, int cod) {
+	if (h == NULL) return NULL;
+	else
+	{
+		Jogo* aux = h;
+		while (aux != NULL) {
+			if (aux->cod == cod) {
+				//cria copia do jogo ecnontrado
+				Jogo* auxJogo = criaJogo(aux->cod, aux->nome, aux->tipo);
+				return(auxJogo);
+			}
+			aux = aux->next;
+		}
+
+		return NULL;
+	}
+
+}
 //Ordenar uma Lista
 Jogo* OrdenaLista(Jogo* h);
 //Elimina uma lista
